@@ -1,0 +1,14 @@
+diffusers>=0.32.2
+transformers>=4.38.0
+huggingface_hub>=0.10.0
+httpx
+omegaconf
+einops
+opencv-python
+mediapipe>=0.10.8
+ffmpeg-python>=0.2.0
+safetensors
+soundfile
+DeepCache
+torchvision
+torchaudio
