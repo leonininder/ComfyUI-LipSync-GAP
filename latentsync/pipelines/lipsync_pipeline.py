@@ -830,8 +830,9 @@ class LipsyncPipeline(DiffusionPipeline):
                 # --- AUDIO DEBUG ---
                 if i == 0:
                     print(f"[ComfyUI-LipSync-GAP] AudioEmbeds Stats: Shape={audio_embeds.shape}")
-                    print(f"Max={audio_embeds.max().item():.4f}, Min={audio_embeds.min().item():.4f}, Mean={audio_embeds.mean().item():.4f}, Std={audio_embeds.std().item():.4f}")
-                    if audio_embeds.std().item() < 1e-4:
+                    _fd = audio_embeds.float().cpu()
+                    print(f"Max={_fd.max().item():.4f}, Min={_fd.min().item():.4f}, Mean={_fd.mean().item():.4f}, Std={_fd.std().item():.4f}")
+                    if _fd.std().item() < 1e-4:
                         print("[ComfyUI-LipSync-GAP] WARNING: Audio Embeddings seem essentially empty/flat!")
                 # -------------------
                 
