@@ -9,6 +9,5 @@ mediapipe>=0.10.8
 ffmpeg-python>=0.2.0
 safetensors
 soundfile
-DeepCache
 torchvision
 torchaudio

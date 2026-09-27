@@ -1,0 +1,44 @@
+[
+  {
+    "repo": "bytedance/LatentSync",
+    "path": "docs/licenses/bytedance-LatentSync.txt",
+    "source": "https://github.com/bytedance/LatentSync/blob/main/LICENSE",
+    "git_blob_sha": "f49a4e16e68b128803cc2dcea614603632b04eac",
+    "sha256": "43070e2d4e532684de521b885f385d0841030efa2b1a20bafb76133a5e1379c1"
+  },
+  {
+    "repo": "openai/whisper",
+    "path": "docs/licenses/openai-whisper.txt",
+    "source": "https://github.com/openai/whisper/blob/main/LICENSE",
+    "git_blob_sha": "d25552598bb9c5400612159ed4bab92ce12a5ce5",
+    "sha256": "b5d65a59060e68c4ff940e1eddfa6f94b2d68fdf58ed7f4dd57721c997e35e9d"
+  },
+  {
+    "repo": "TMElyralab/MuseTalk",
+    "path": "docs/licenses/TMElyralab-MuseTalk.txt",
+    "source": "https://github.com/TMElyralab/MuseTalk/blob/main/LICENSE",
+    "git_blob_sha": "132bf6fc803b84b40fee6c2132907dfaa396dc3b",
+    "sha256": "992ec5fd1dd4964cfa003665196cd0c0c10a7a5aa10109991e964eebd2c7f116"
+  },
+  {
+    "repo": "guoyww/AnimateDiff",
+    "path": "docs/licenses/guoyww-AnimateDiff.txt",
+    "source": "https://github.com/guoyww/AnimateDiff/blob/main/LICENSE.txt",
+    "git_blob_sha": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  {
+    "repo": "huggingface/diffusers",
+    "path": "docs/licenses/huggingface-diffusers.txt",
+    "source": "https://github.com/huggingface/diffusers/blob/main/LICENSE",
+    "git_blob_sha": "038e32f6445e8f265bde482613cf0d2f43d86dbc",
+    "sha256": "f9e2070c247517b1ddf65f7b11b393484a18da91a958fd18a97bd0f241c3125c"
+  },
+  {
+    "repo": "OpenGVLab/VideoMAEv2",
+    "path": "docs/licenses/OpenGVLab-VideoMAEv2.txt",
+    "source": "https://github.com/OpenGVLab/VideoMAEv2/blob/master/LICENSE",
+    "git_blob_sha": "2925d85d93cee75efe0af95f749d07e338e09d11",
+    "sha256": "8f03d25fbcffafa2254d4d1414bf2a38423a966006b4a6964ee21f728d610bff"
+  }
+]

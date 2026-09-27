@@ -18,14 +18,16 @@ from .latentsync.pipelines.lipsync_pipeline import LipsyncPipeline
 from .latentsync.whisper.whisper import load_model as load_whisper_model
 from .latentsync.whisper.whisper import available_models as whisper_available_models
 from .latentsync.whisper.whisper import _MODELS as WHISPER_MODEL_URLS
-from DeepCache import DeepCacheSDHelper
+from .model_selection import resolve_whisper
+from .asset_integrity import verify_named_asset
+from .output_contract import align_output_frames
 
 # Register model folders
 if "latentsync" not in folder_paths.folder_names_and_paths:
     folder_paths.add_model_folder_path("latentsync", os.path.join(folder_paths.models_dir, "latentsync"))
 
 WHISPER_ALIAS_SET = set(whisper_available_models())
-WHISPER_DEFAULT_CHOICES = sorted(WHISPER_ALIAS_SET | {"tiny.pt", "small.pt", "medium.pt", "large.pt"})
+WHISPER_DEFAULT_CHOICES = ["tiny", "tiny.en", "tiny.pt"]
 
 
 def _normalize_whisper_selection(selection: str) -> str:
@@ -52,6 +54,8 @@ class GapLipSyncModelLoader:
     CATEGORY = "Geekatplay Studio/LipSync GAP"
 
     def load_models(self, unet_model, whisper_model, precision, vae):
+        whisper_folder = os.path.join(folder_paths.models_dir, "latentsync", "whisper")
+        audio_encoder_identifier = resolve_whisper(whisper_model, whisper_folder, WHISPER_MODEL_URLS)
         device = comfy.model_management.get_torch_device()
         
         # Determine dtype
@@ -76,6 +80,7 @@ class GapLipSyncModelLoader:
         if not unet_path or not os.path.exists(unet_path):
              raise FileNotFoundError(f"UNet model not found: {unet_model}")
 
+        verify_named_asset("unet", unet_path)
         print(f"[ComfyUI-LipSync-GAP] Loading UNet from {unet_path} with precision {precision}")
         
         # Assume unet_path acts as 'pretrained_model_name_or_path'. 
@@ -124,8 +129,6 @@ class GapLipSyncModelLoader:
         print(f"[ComfyUI-LipSync-GAP] Loading AudioEncoder (Whisper: {whisper_model})...")
         # Audio2Feature expects a 'model_path' which is either an alias or a resolved checkpoint path.
         # Convert known selections to aliases so the internal loader can download them automatically when missing.
-        audio_encoder_identifier = whisper_alias if alias_known else (whisper_path if os.path.exists(whisper_path) else whisper_model)
-
         audio_encoder = Audio2Feature(
             model_path=audio_encoder_identifier,
             device="cuda", # AudioEncoder likely needs cuda
@@ -293,7 +296,7 @@ class GapLipSyncSampler:
             end_idx = max(start_idx, min(end_idx, input_waveform.shape[-1]))
             
             if start_idx == end_idx:
-                 print(f"[ComfyUI-LipSync-GAP] Warning: Audio slicing resulted in empty audio. Using original.")
+                 raise ValueError("Requested audio slice is empty; check offset and duration.")
             else:
                  input_waveform = input_waveform[..., start_idx:end_idx]
                  new_audio = audio.copy()
@@ -404,7 +407,7 @@ class GapLipSyncSampler:
                 waveform = resampler(waveform)
                 sample_rate = target_sr
             except Exception as e:
-                print(f"[ComfyUI-LipSync-GAP] Error resampling audio: {e}. Proceeding without resampling (might cause issues).")
+                raise RuntimeError("Audio resampling to 16000 Hz failed; inference stopped. Check torchaudio compatibility.") from e
 
         # Mix to Mono (Required by Whisper internal model, though check_inputs usually handles it, doing it explicitly is safer)
         if waveform.shape[0] > 1:
@@ -423,31 +426,31 @@ class GapLipSyncSampler:
         waveform_np = waveform.numpy().T # [N, 1]
         
         try:
-            sf.write(temp_audio_path, waveform_np, sample_rate)
-            print(f"[ComfyUI-LipSync-GAP] Saved prepared audio (16k, Mono) to {temp_audio_path}")
-        except Exception as e:
-             print(f"[ComfyUI-LipSync-GAP] Failed to save audio using soundfile: {e}. Trying torchaudio.")
-             import torchaudio
-             torchaudio.save(temp_audio_path, waveform, sample_rate)
+            try:
+                sf.write(temp_audio_path, waveform_np, sample_rate)
+                print(f"[ComfyUI-LipSync-GAP] Saved prepared audio (16k, Mono) to {temp_audio_path}")
+            except Exception as e:
+                 print(f"[ComfyUI-LipSync-GAP] Failed to save audio using soundfile: {e}. Trying torchaudio.")
+                 import torchaudio
+                 torchaudio.save(temp_audio_path, waveform, sample_rate)
         
-        # Run Inference
-        generator = torch.Generator(device=device).manual_seed(seed)
+            # Run Inference
+            generator = torch.Generator(device=device).manual_seed(seed)
         
-        # LatentSync needs the mask image path. We included one in utils.
-        mask_path = os.path.join(os.path.dirname(__file__), "latentsync", "utils", "mask.png")
+            # LatentSync needs the mask image path. We included one in utils.
+            mask_path = os.path.join(os.path.dirname(__file__), "latentsync", "utils", "mask.png")
         
-        try:
             result_frames = pipeline(
-                video_frames=video_frames,
-                audio_waveform=temp_audio_path, # Pass path instead of array
-                video_fps=frame_rate,
-                audio_sample_rate=16000,
-                num_inference_steps=steps,
-                guidance_scale=guidance_scale,
-                weight_dtype=dtype,
-                mask_image_path=mask_path,
-                generator=generator
-            )
+                    video_frames=video_frames,
+                    audio_waveform=temp_audio_path, # Pass path instead of array
+                    video_fps=frame_rate,
+                    audio_sample_rate=16000,
+                    num_inference_steps=steps,
+                    guidance_scale=guidance_scale,
+                    weight_dtype=dtype,
+                    mask_image_path=mask_path,
+                    generator=generator
+                )
         finally:
             # Cleanup temp audio
             if os.path.exists(temp_audio_path):
@@ -479,6 +482,7 @@ class GapLipSyncSampler:
         if isinstance(result_frames, np.ndarray):
             result_frames = torch.from_numpy(result_frames).float() / 255.0
             
+        result_frames = align_output_frames(result_frames, audio["waveform"].shape[-1], audio["sample_rate"], frame_rate)
         return (result_frames, audio)
 
 NODE_CLASS_MAPPINGS = {

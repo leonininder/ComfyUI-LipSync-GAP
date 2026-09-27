@@ -1,6 +1,7 @@
 import mediapipe as mp
 import numpy as np
 import os
+from asset_integrity import verify_named_asset
 
 # Try to import the new Tasks API
 try:
@@ -22,6 +23,7 @@ class FaceDetector:
             if not os.path.exists(model_path):
                 raise RuntimeError(f"FaceDetector: Model file not found at {model_path}. Please execute the download script or check installation.")
 
+            verify_named_asset("landmarker", model_path)
             base_options = python.BaseOptions(model_asset_path=model_path)
             options = vision.FaceLandmarkerOptions(
                 base_options=base_options,
