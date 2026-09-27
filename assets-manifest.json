@@ -1,0 +1,29 @@
+{
+  "verified_on": "2026-09-27",
+  "assets": [
+    {
+      "name": "unet",
+      "relative": "models/latentsync/latentsync_unet.pt",
+      "size": 5072222488,
+      "sha256": "0a478e89eb660f82da4c35dbdde8a5adfb27f99d1b4e50edd03729e1e98316d3",
+      "url": "https://huggingface.co/ByteDance/LatentSync-1.6/resolve/c42c7e6c8e9c213626389fa7d9a3c444b8536353/latentsync_unet.pt",
+      "root": "comfy"
+    },
+    {
+      "name": "whisper",
+      "relative": "models/latentsync/whisper/tiny.pt",
+      "size": 75572083,
+      "sha256": "65147644a518d12f04e32d6f3b26facc3f8dd46e5390956a9424a650c0ce22b9",
+      "url": "https://huggingface.co/ByteDance/LatentSync/resolve/405eda8eab9f65c1a6e0c292a5dee5a08089e2ae/whisper/tiny.pt",
+      "root": "comfy"
+    },
+    {
+      "name": "landmarker",
+      "relative": "latentsync/weights/face_landmarker.task",
+      "size": 3758596,
+      "sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+      "url": "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
+      "root": "extension"
+    }
+  ]
+}

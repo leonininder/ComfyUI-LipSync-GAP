@@ -1,0 +1,54 @@
+[
+  {
+    "path": "latentsync/data/syncnet_dataset.py",
+    "sha256": "b4f4536654a0c480b533d561453bf49f0895e4cd21730f5c8c59828b7af96e4b"
+  },
+  {
+    "path": "latentsync/data/unet_dataset.py",
+    "sha256": "a045a086f9821d9db73319da58d1cfdd777ab1cc644bb63e1fb408cf3602580f"
+  },
+  {
+    "path": "latentsync/models/wav2lip_syncnet.py",
+    "sha256": "7c4eb48be864ac85cf6f810bc3fcdf959df801b17536eb40d09d8c2a47a4f3a1"
+  },
+  {
+    "path": "latentsync/trepa/loss.py",
+    "sha256": "fea8f957e8a99b0f5a51935b836dffc392840b4dc2386a329b45c4e11b82393c"
+  },
+  {
+    "path": "latentsync/trepa/third_party/VideoMAEv2/__init__.py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "latentsync/trepa/third_party/VideoMAEv2/utils.py",
+    "sha256": "e8353a44f4b6220aacd371b766d45fd59128f8854a556daaa351cfa9ded2795b"
+  },
+  {
+    "path": "latentsync/trepa/third_party/VideoMAEv2/videomaev2_finetune.py",
+    "sha256": "59bc41e00bb8284454680b8f25f1ccbf2d6f28972af256229a7552b7d5c143a2"
+  },
+  {
+    "path": "latentsync/trepa/third_party/VideoMAEv2/videomaev2_pretrain.py",
+    "sha256": "cb1c6fc8111ae3055d0050991394c9c2a4f44938c52eb364551479d0398b262e"
+  },
+  {
+    "path": "latentsync/trepa/third_party/__init__.py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "latentsync/trepa/utils/__init__.py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "latentsync/trepa/utils/data_utils.py",
+    "sha256": "8d03649393e4e868d665cc004e763c5beaf7ac3d7450f98cda9deacb59454db0"
+  },
+  {
+    "path": "latentsync/trepa/utils/metric_utils.py",
+    "sha256": "e319ac1567923a3e35b6a1b0750e9c03645eace6bd922907fc7d27ebe3f67635"
+  },
+  {
+    "path": "latentsync/utils/audio.py",
+    "sha256": "9e4ea02e66e62f0ffbb07e97e08d166095e17fad308a202b449f8a684106c1bc"
+  }
+]

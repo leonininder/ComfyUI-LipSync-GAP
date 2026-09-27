@@ -66,7 +66,7 @@ class ImageProcessor:
 
     def _prepare_mask_variants(self):
         mask_rgb = torch.clamp(self.mask_image.float(), 0.0, 1.0)
-        mask_gray = mask_rgb[:1].cpu().numpy().astype(np.float32)
+        mask_gray = mask_rgb[0].cpu().numpy().astype(np.float32)
 
         binary_mask = (mask_gray > 0.5).astype(np.float32)
         kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (9, 9))

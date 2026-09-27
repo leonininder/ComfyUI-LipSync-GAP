@@ -1,0 +1,90 @@
+[
+  {
+    "path": "latentsync/models/attention.py",
+    "sha256": "020a85b9590ec0a0f2b32d932d8217e99e13581522d7e8a6b1f4b0e8f69fd3ca",
+    "header_sources": [
+      "https://github.com/huggingface/diffusers/blob/main/src/diffusers/models/attention.py"
+    ],
+    "apache_header": false
+  },
+  {
+    "path": "latentsync/models/motion_module.py",
+    "sha256": "2118ac695eb7fa2042087f9396e41698754a5c00c9a7167e9f0ee840454c4ba6",
+    "header_sources": [
+      "https://github.com/guoyww/AnimateDiff/blob/main/animatediff/models/motion_module.py"
+    ],
+    "apache_header": false
+  },
+  {
+    "path": "latentsync/models/resnet.py",
+    "sha256": "b44dd8b2f4b3fa4f07cecb9ed449c185418b2f04a349424a25bc6bfaf78d335e",
+    "header_sources": [
+      "https://github.com/huggingface/diffusers/blob/main/src/diffusers/models/resnet.py"
+    ],
+    "apache_header": false
+  },
+  {
+    "path": "latentsync/models/stable_syncnet.py",
+    "sha256": "fb9f19320f3f261568dc822ea732fdb4a831b8512f71833d9d5a0a1b7f170380",
+    "header_sources": [],
+    "apache_header": true
+  },
+  {
+    "path": "latentsync/models/unet.py",
+    "sha256": "099af6f6bde80fe8fb99e8fff8ff3656e5d3dcf57523846bf21d1f77c3ba3d0e",
+    "header_sources": [
+      "https://github.com/guoyww/AnimateDiff/blob/main/animatediff/models/unet.py"
+    ],
+    "apache_header": false
+  },
+  {
+    "path": "latentsync/models/unet_blocks.py",
+    "sha256": "b8d174593ec36e307ca271224ee8d878392dcbefaebcae2e23bf391721b5fd89",
+    "header_sources": [
+      "https://github.com/guoyww/AnimateDiff/blob/main/animatediff/models/unet_blocks.py"
+    ],
+    "apache_header": false
+  },
+  {
+    "path": "latentsync/models/utils.py",
+    "sha256": "749cc7f2384174f0a065f58adf14cffe7c42af889223ed3d37f095b5608fc70c",
+    "header_sources": [],
+    "apache_header": true
+  },
+  {
+    "path": "latentsync/pipelines/lipsync_pipeline.py",
+    "sha256": "8817e94b0bcceb2edcacfc8d5d40169a59a6dd808e07ef73d098c156697a417b",
+    "header_sources": [
+      "https://github.com/guoyww/AnimateDiff/blob/main/animatediff/pipelines/pipeline_animation.py"
+    ],
+    "apache_header": false
+  },
+  {
+    "path": "latentsync/utils/av_reader.py",
+    "sha256": "6991122a982901e312fb03e92a2cb5ec5a49709397a41cad439552d4d9863efc",
+    "header_sources": [
+      "https://github.com/dmlc/decord/issues/208"
+    ],
+    "apache_header": false
+  },
+  {
+    "path": "latentsync/utils/image_processor.py",
+    "sha256": "25b0278ac01df8b8a08d375a2e38d9a8c6862fde0eed44c02829b9b6af1c65ba",
+    "header_sources": [],
+    "apache_header": true
+  },
+  {
+    "path": "latentsync/utils/util.py",
+    "sha256": "db6470a09c43baed7830ef2d7f50af704b199b1fc43431fad661b60779835f34",
+    "header_sources": [],
+    "apache_header": true
+  },
+  {
+    "path": "latentsync/whisper/audio2feature.py",
+    "sha256": "60a7f67507d6eeae95db4dbb14bbe2a5c4f1752c704784b8f8435a879d33c2ee",
+    "header_sources": [
+      "https://github.com/TMElyralab/MuseTalk/blob/main/musetalk/whisper/audio2feature.py"
+    ],
+    "apache_header": false
+  }
+]
